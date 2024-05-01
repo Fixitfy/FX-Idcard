@@ -1,0 +1,274 @@
+Config = {}
+Config.Language = "en"
+Config.Framework = "VORP" --- VORP - RSG
+Config.TakeCardType = "sql" ---- or "item" (If you select item, it will give you a special ID card with metada and you can have more than one ID card. If you select sql, it will be saved in everyone's data and you will be able to create id card only 1 time.)
+Config.Keybinds = {
+    ["takephoto"] = 0x760A9C6F,
+    ["exit"] = 0x156F7119,
+
+    ["camUp"] = 0x62800C92,
+    ["camDown"] = 0x8BDE7443,
+
+    ["camLeft"] = 0x07CE1E61,
+    ["camRight"] = 0xF84FA74F,
+
+    ["camForward"] = 0xCBD5B26E,
+    ["camBack"] = 0x110AD1D2,
+
+    ["printphoto"] = 0xC7B5340A,
+    ["takeidcard"] = 0x2CD5343E,--
+}
+Config.Locale = {
+    ["en"] = {
+        --- PROMPTS ---
+        ["promptitle"] = "Photographer",
+        ["promptitle2"] = "Id Card System",
+        ["takephoto"] = "Take Photo",
+        ["printphoto"] = "Print Photo",
+        ["exit"] = "Exit",
+        ["camUp"] = "Up",
+        ["camDown"] = "Down",
+        ["camLeft"] = "Left",
+        ["camRight"] = "Right",
+        ["camForward"] = "Forward",
+        ["camBack"] = "Back",
+        ["promptitle2"] = "Identity Card System",
+        ["takeidcard"] = "Take Id Card",
+        --- NOTIFY -----
+        ["noimg"] = "No picture ~COLOR_YELLOW~link~COLOR_WHITE~ entered !",
+        ["successprint"] = "The photo has been added to your inventory, you can view it with a ~COLOR_YELLOW~double click",
+        ["addIdCard"] = "The id card has been added to your inventory, you can view it with a ~COLOR_YELLOW~double click",
+        ["errorprint"] = "Print ~COLOR_RED~failed ~COLOR_WHITE~!",
+        ["erroridcard"] = "ID Card creation ~COLOR_RED~failed ~COLOR_WHITE~!",
+        ["photodesc"] = "Photo Id",
+        ["nodata"] = "You don't have an identity !",
+        ["nomoney"] = "You don't have enough money. Fee : ~COLOR_YELLOW~${money}",
+        ["successidcard"] = "Your ID card is attached. You can now show your ID",
+        ["useitem"] = "Use your photo from inventory within ~COLOR_YELLOW~${time} ~COLOR_WHITE~seconds",
+        ["alreadyidcard"] = "You already have an identity card. You need approval to change your ID card",
+        ["idcarddesc"] = "${name}'s identity </br>Identity Number: <span style=color:yellow;>${charid}",
+    },
+    ["tr"] = {
+        --- PROMPTS ---
+        ["promptitle"] = "Kamera Konumunu Ayarla",
+        ["promptitle2"] = "Vesikalik Fotograf Sistemi",
+        ["takephoto"] = "Fotograf Cekin",
+        ["printphoto"] = "Fotografini Al",
+        ["exit"] = "Cikis",
+        ["camUp"] = "Yukari",
+        ["camDown"] = "Asagi",
+        ["camLeft"] = "Sol",
+        ["camRight"] = "Sag",
+        ["camForward"] = "Yakinlastir",
+        ["camBack"] = "Uzaklastir",
+        ["promptitle2"] = "Kimlik Karti Sistemi",
+        ["takeidcard"] = "Kimligini Al",
+        --- NOTIFY -----
+        ["noimg"] = "Fotograf ~COLOR_YELLOW~linki~COLOR_WHITE~ girilmemis!",
+        ["successprint"] = "Vesikalik fotografiniz envanterinize eklendi, ~COLOR_YELLOW~iki kez tiklayarak goruntuleyebilirsiniz.",
+        ["addIdCard"] = "Kimliginiz envanterinize eklendi, ~COLOR_YELLOW~iki kez tiklayarak goruntuleyebilirsiniz.",
+        ["errorprint"] = "Fotograf cikartma ~COLOR_RED~basarisiz ~COLOR_WHITE~!",
+        ["erroridcard"] = "Kimlik karti ~COLOR_RED~olusturulamadi ~COLOR_WHITE~!",
+        ["photodesc"] = "Photo Id",
+        ["nodata"] = "Bir kimliginiz yok !",
+        ["nomoney"] = "Yeterli paraniz yok. Ucret : ~COLOR_YELLOW~${money}",
+        ["successidcard"] = "Kimlik kartiniz kaydedildi. Kimliginizi gösterebilirsiniz",
+        ["useitem"] = "Vesikalik fotografinizi cantanizdan secmek icin ~COLOR_YELLOW~${time} ~COLOR_WHITE~saniyeniz var",
+        ["alreadyidcard"] = "Zaten bir kimlik kartiniz var. Kimlik kartinizi degistirmek icin onay almalisiniz",
+        ["idcarddesc"] = "${name}'s kimlik </br>Kimlik Numarasi: <span style=color:yellow;>${charid}",
+        ["successdelete"] = "IDCard has been deleted successful",
+        ["nojob"] = "You have no authorisation!",
+        ["errorcommand"] = "Incorrect usage. use this way /deleteidcard id",
+    }
+}
+Config.HideHud = function()
+	exports['fx-hud']:hideHud()
+end
+Config.ShowHud = function()
+	exports['fx-hud']:showHud()
+end
+
+Config.Prices = { -- cash
+    printphoto = 5, -- or false (if false == free)
+    idcard = 50, -- or false if false == free)
+}
+
+Config.DeletePlayerDataCommand = "deleteidcard" -- /deleteidcard (id)      (Only admin or job "judge" check this s/opnesource.lua)
+Config.SelectPhotoTime = 30 -- second
+Config.PrintPhotoItem = "printphoto" --- item name
+Config.ManIdCardItem = "man_idcard" --- item name
+Config.WomanIdCardItem = "woman_idcard" --- item name
+Config.ShowDistance = 1.5 --- Show id card and photo distance
+Config.Photographers = {
+    ["Blackwater"] = {
+        promptCoords = vector4(-811.7769, -1373.9686, 44.0733, 104.9485),
+        promptDistance = 2,
+        pedCoords = vector4(-815.55, -1374.78, 44.28, -91.68),
+        camCoords = vector4(-814.40, -1374.85, 44.90, 86.48),
+        camFov = 60.0,
+    },
+}
+
+Config.PedSpawnDistance = 15
+Config.Religious = {"Christian"} -- {"Christian","Muslim","Jewish"} 
+Config.IDCardNPC = {
+    ["Blackwater"] = {
+        coords = vector4(-798.8420, -1194.6926, 44.0010, 161.6237),
+        models = "cs_brontesbutler",
+        distance = 3,
+        blips = {
+            name = "KIMLIK ISLEMLERI",
+            sprite = -1656531561,
+            scale = 0.6,
+            modifier = "BLIP_MODIFIER_MP_COLOR_32",
+        },
+        anims = {
+            dict = "WORLD_HUMAN_SMOKE_NERVOUS_STRESSED",
+            name = false,
+        },
+        timeSettings = { -- or false
+            open = 8,
+            close = 21,
+            blipmodifier = "BLIP_MODIFIER_MP_COLOR_2",
+        },
+
+    },
+    ["Strawberry"] = {
+        coords = vector4(-1803.5564, -345.7397, 164.4913, 210.3091),
+        models = "cs_brontesbutler",
+        distance = 3,
+        blips = {
+            name = "KIMLIK ISLEMLERI",
+            sprite = -1656531561,
+            scale = 0.6,
+            modifier = "BLIP_MODIFIER_MP_COLOR_32",
+        },
+        anims = {
+            dict = "WORLD_HUMAN_SMOKE_NERVOUS_STRESSED",
+            name = false,
+        },
+        timeSettings = { -- or false
+            open = 8,
+            close = 21,
+            blipmodifier = "BLIP_MODIFIER_MP_COLOR_2",
+        },
+
+    },
+    ["Valentine"] = {
+        coords = vector4(-175.3824, 631.9274, 114.1396, 322.0134),
+        models = "cs_brontesbutler",
+        distance = 3,
+        blips = {
+            name = "KIMLIK ISLEMLERI",
+            sprite = -1656531561,
+            scale = 0.6,
+            modifier = "BLIP_MODIFIER_MP_COLOR_32",
+        },
+        anims = {
+            dict = "WORLD_HUMAN_SMOKE_NERVOUS_STRESSED",
+            name = false,
+        },
+        timeSettings = { -- or false
+            open = 8,
+            close = 21,
+            blipmodifier = "BLIP_MODIFIER_MP_COLOR_2",
+        },
+
+    },
+    ["Rhodes"] = {
+        coords = vector4(1230.2253, -1298.4535, 76.9544, 216.9492),
+        models = "cs_brontesbutler",
+        distance = 3,
+        blips = {
+            name = "KIMLIK ISLEMLERI",
+            sprite = -1656531561,
+            scale = 0.6,
+            modifier = "BLIP_MODIFIER_MP_COLOR_32",
+        },
+        anims = {
+            dict = "WORLD_HUMAN_SMOKE_NERVOUS_STRESSED",
+            name = false,
+        },
+        timeSettings = { -- or false
+            open = 8,
+            close = 21,
+            blipmodifier = "BLIP_MODIFIER_MP_COLOR_2",
+        },
+
+    },
+    ["Armadillo"] = {
+        coords = vector4(-3729.1255, -2601.2808, -12.8877, 181.9450),
+        models = "cs_brontesbutler",
+        distance = 3,
+        blips = {
+            name = "KIMLIK ISLEMLERI",
+            sprite = -1656531561,
+            scale = 0.6,
+            modifier = "BLIP_MODIFIER_MP_COLOR_32",
+        },
+        anims = {
+            dict = "WORLD_HUMAN_SMOKE_NERVOUS_STRESSED",
+            name = false,
+        },
+        timeSettings = { -- or false
+            open = 8,
+            close = 21,
+            blipmodifier = "BLIP_MODIFIER_MP_COLOR_2",
+        },
+
+    },
+    ["Saintdenis"] = {
+        coords = vector4(2510.2656, -1308.9792, 49.0036, 270.7017),
+        models = "cs_brontesbutler",
+        distance = 3,
+        blips = {
+            name = "KIMLIK ISLEMLERI",
+            sprite = -1656531561,
+            scale = 0.6,
+            modifier = "BLIP_MODIFIER_MP_COLOR_32",
+        },
+        anims = {
+            dict = "WORLD_HUMAN_SMOKE_NERVOUS_STRESSED",
+            name = false,
+        },
+        timeSettings = { -- or false
+            open = 8,
+            close = 21,
+            blipmodifier = "BLIP_MODIFIER_MP_COLOR_2",
+        },
+
+    },
+}
+
+local isServer = IsDuplicityVersion()
+function Notify(data)
+    local text = data.text
+    local time = data.time
+    local type = data.type
+    if isServer then
+        local src = data.source
+        -- Serverside
+        if Config.Framework == "VORP" then
+            TriggerClientEvent("vorp:TipBottom",src, text, time, type)
+        elseif Config.Framework == "RSG" then
+            RSGCore.Functions.Notify(src, text, type)
+        end
+    else
+        -- Clientside
+        if Config.Framework == "VORP" then
+            TriggerEvent("vorp:TipBottom", text, time, type)
+        elseif Config.Framework == "RSG" then
+            RSGCore.Functions.Notify(text, type)
+        end
+    end
+end
+
+function Locale(key,subs)
+    local translate = Config.Locale[Config.Language][key] and Config.Locale[Config.Language][key] or "Config.Locale["..Config.Language.."]["..key.."] doesn't exits"
+    subs = subs and subs or {}
+    for k, v in pairs(subs) do
+        local templateToFind = '%${' .. k .. '}'
+        translate = translate:gsub(templateToFind, tostring(v))
+    end
+    return tostring(translate)
+end
