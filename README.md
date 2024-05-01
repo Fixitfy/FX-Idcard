@@ -1,3 +1,8 @@
+# FX-IDCard
+## To use the script, you must purchase it for free via tebex. https://store.fixitfy.com.tr/
+- If you have any problems with the installation or operation of the script, you can get help by creating a ticket on our discord server. We provide 24/7 support to you. https://discord.fixitfy.com.tr/
+
+
 ### Fixitfy Upload Service
 
 - Upload your pictures here. You will not have any breakage or problems
