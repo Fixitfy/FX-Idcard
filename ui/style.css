@@ -1,0 +1,889 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@font-face {
+    font-family: "junicode";
+    src:url("/ui/assets/fonts/Junicode.ttf") format("truetype");
+}
+@font-face {
+    font-family: "western";
+    src:url("/ui/assets/fonts/WesternBangBang-Regular.woff") format("opentype");
+}
+@font-face {
+    font-family: "sketch";
+    src:url("/ui/assets/fonts/SketchPencilDemoItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "arington";
+    src:url("/ui/assets/fonts/Arington_Demo.ttf") format("truetype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: 'Poppins', sans-serif;
+    transition: all 500ms ease-in-out;
+    font-weight: 400;
+    font-size: 1.0vh;
+    color: white;
+    overflow: hidden;
+    user-select: none;
+}
+
+.id-card {
+    position: absolute;
+    width: 25%;
+    height: 35%;
+    top: 20%;
+    right: 5%;
+    background-color: rgb(0, 0, 0);
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    background: url(/ui/assets/id-card.png) center / 100% 105% no-repeat;
+}
+
+.server-logo {
+    position: absolute;
+    width: 7%;
+    height: 7%;
+    top: 12%;
+    left: 9%;
+    filter: sepia(0.8);
+    background: url(/ui/assets/logo.png) center / contain no-repeat;
+    /* background-color: bisque; */
+    opacity: 0.9;
+}
+.playerimg {
+    position: absolute;
+    width: 28%;
+    height: 48%;
+    top: 38%;
+    left: 9.5%;
+    filter: drop-shadow(0 0 0.25rem rgb(0, 0, 0));
+    filter: sepia(1);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 32px;
+
+}
+.frame {
+    position: absolute;
+    width: 28%;
+    height: 48%;
+    top: 38%;
+    left: 9.5%;
+    filter: drop-shadow(0 0 0.25rem rgb(0, 0, 0));
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.9;
+}
+
+.sex {
+    position: absolute;
+    font-family: "western";
+    top: 43%;
+    left: 43%;
+    font-size: 2.0vh;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.hair {
+    position: absolute;
+  font-family: "sketch";
+    top: 44%;
+    left: 48%;
+    font-size: 1.5vh;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000000d0;
+}
+.eyes {
+    position: absolute;
+  font-family: "sketch";
+    top: 44%;
+    left: 58%;
+    font-size: 1.5vh;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000000d0;
+}
+.height {
+    position: absolute;
+    font-family: "western";
+    top: 42.5%;
+    left: 68.5%;
+    font-size: 2.0vh;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.weight {
+    position: absolute;
+    font-family: "western";
+    top: 44%;
+    left: 76%;
+    font-size: 1.5vh;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #000000d0;
+}
+.religious {
+    position: absolute;
+    font-family: "sketch";
+    top: 44%;
+    left: 83%;
+    font-size: 1.5vh;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000000d0;
+}
+.dateofbirth {
+    position: absolute;
+    font-family: "western";
+    top: 51.3%;
+    left: 45%;
+    font-size: 2.0vh;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #000000;
+}
+.charid {
+    position: absolute;
+    font-family: "western";
+    top: 18.4%;
+    left: 64%;
+    font-size: 3.0vh;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #000000;
+}
+.age {
+    position: absolute;
+    font-family: "western";
+    top: 51.3%;
+    left: 67.4%;
+    font-size: 2.0vh;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.license {
+    position: absolute;
+    font-family: "western";
+    top: 52%;
+    left: 77.4%;
+    font-size: 1.5vh;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.country {
+    position: absolute;
+    font-family: "western";
+    top: 12%;
+    left: 16%;
+    font-size: 2.5vh;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #462f1cfa;
+}
+.card-zone {
+    position: absolute;
+    font-family: "sketch";
+    top: 27%;
+    left: 10%;
+    font-size: 2.0vh;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.name {
+    position: absolute;
+    font-family: "sketch";
+    top: 68%;
+    left: 48%;
+    font-size: 2.4vh;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000000;
+}
+
+.photograph {
+    position: absolute;
+    width: 15%;
+    height:37%;
+    top: 20%;
+    left: 5%;
+    background-color: rgb(0, 0, 0);
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    background: url(/ui/assets/photoframe.png) center / 100% 105% no-repeat;
+}
+
+.photo-frame {
+    position: absolute;
+    width: 90%;
+    height:76%;
+    top: 7.5%;
+    left: 5%;
+    background-color: rgb(0, 0, 0);
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    background: url(/ui/assets/photoframe2.png) center / 100% 105% no-repeat;
+}
+.photo {
+    position: absolute;
+    width: 88%;
+    height:76%;
+    top: 7.5%;
+    left: 6%;
+    /* background-color: rgb(0, 0, 0); */
+    filter: drop-shadow(0 0 0.25rem rgb(0, 0, 0));
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.printphoto {
+    position: absolute;
+    display: none;
+    width: 15%;
+    height:40%;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    background: url(/ui/assets/photoframe.png) center / 100% 105% no-repeat;
+}
+
+#link {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1vh;
+    width: 88%;
+    height: 5%;
+    bottom: 10%;
+    left: 6%;
+    color: white;
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    background: url(/ui/assets/toast_bg2.png) center / 100% 105% no-repeat;
+}
+
+.preview {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "junicode";
+    font-weight: 600;
+    font-size: 1.1vh;
+    width: 25%;
+    height: 5%;
+    bottom: 4%;
+    left: 5%;
+    color: black;
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    transition: all ease 0.5s;
+    background: url(/ui/assets/toast_bg3.png) center / 100% 105% no-repeat;
+}
+.print {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "junicode";
+    font-weight: 600;
+    font-size: 1.1vh;
+    width: 25%;
+    height: 5%;
+    bottom: 4%;
+    right: 5%;
+    color: black;
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    transition: all ease 0.5s;
+    background: url(/ui/assets/toast_bg3.png) center / 100% 105% no-repeat;
+}
+
+.preview:hover,
+.print:hover {
+    color: white;
+    bottom: 2.5%;
+    filter: drop-shadow(0 0 0.35rem rgb(219, 187, 116), 113);
+    background: url(/ui/assets/toast_bg2.png) center / 100% 105% no-repeat;
+}
+.preview:active,
+.print:active {
+    color: white;
+    transition: all ease 0s;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0), 113);
+    background: url(/ui/assets/toast_bg2.png) center / 100% 105% no-repeat;
+}
+
+.close {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "junicode";
+    font-weight: 600;
+    font-size: 1.1vh;
+    width: 6%;
+    height: 5%;
+    top: 1%;
+    right: 5%;
+    color: black;
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    transition: all ease 0.5s;
+    background: url(/ui/assets/cancel2.png) center / 100% 105% no-repeat;
+}
+.close-create {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "junicode";
+    font-weight: 600;
+    font-size: 1.1vh;
+    width: 6%;
+    height: 5%;
+    top: 7%;
+    right: 12%;
+    color: black;
+    filter: drop-shadow(0 0 0.35rem rgb(0, 0, 0));
+    transition: all ease 0.5s;
+    background: url(/ui/assets/cancel2.png) center / 100% 105% no-repeat;
+}
+
+.close-create:hover,
+.close:hover {
+    background: url(/ui/assets/cancel.png) center / 100% 105% no-repeat;
+}
+
+.close-create:active {
+    transition: all ease 0s;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 0.35rem rgb(116, 15, 15));
+    background: url(/ui/assets/cancel.png) center / 100% 105% no-repeat;
+}
+.close:active{
+    transition: all ease 0s;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 0.35rem rgb(253, 253, 253));
+    background: url(/ui/assets/cancel.png) center / 100% 105% no-repeat;
+}
+
+.create {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22%;
+    height:65%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0);
+    background: url(/ui/assets/background.png) center / cover no-repeat;
+    user-select: none;
+}
+.previewcreate-photo {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14%;
+    height:30%;
+    top: 48%;
+    left: 34%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 0.75rem rgb(0, 0, 0));
+    user-select: none;
+    z-index:-1;
+}
+
+#preview-frame {
+    position: absolute;
+    width: 80%;
+    height:90%;
+}
+#previewphoto {
+    position: absolute;
+     width: 80%;
+    height:90%;
+    filter: grayscale(100%);
+}
+.create h1 {
+    position: absolute;
+    top: 13%;
+    font-weight: 400;
+    font-size: 4.0vh;
+    color: white;
+    font-family: "western";
+}
+.create h2 {
+    position: absolute;
+    top: 22%;
+    font-weight: 400;
+    font-size: 1.5vh;
+    color: #8f8f8f;
+    font-family: "western";
+}
+
+#usaflag {
+    position: absolute;
+    width: 65%;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+}
+
+.name-cont {
+    position: absolute;
+    width: 72.5%;
+    height: 10%;
+    top: 26%;
+    /* background-color: rgb(49, 48, 48); */
+}
+.city-cont {
+    position: absolute;
+    width: 72.5%;
+    height: 10%;
+    top: 36%;
+    /* background-color: rgb(49, 48, 48); */
+}
+.sex-cont {
+    position: absolute;
+    width: 72.5%;
+    height: 10%;
+    top: 46%;
+    /* background-color: rgb(49, 48, 48); */
+}
+.age-cont {
+    position: absolute;
+    width: 72.5%;
+    height: 10%;
+    top: 56%;
+    /* background-color: rgb(49, 48, 48); */
+}
+.body-cont {
+    position: absolute;
+    width: 72.5%;
+    height: 10%;
+    top: 66%;
+    /* background-color: rgb(49, 48, 48); */
+}
+
+.hair-cont {
+    position: absolute;
+    width: 72.5%;
+    height: 13%;
+    top: 76%;
+    /* background-color: rgb(49, 48, 48); */
+}
+
+.label {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    font-weight: 400;
+    font-size: 1.5vh;
+    color: #ffe398;
+    font-family: "western";
+}
+.name-cont .label {
+        top: 20%;
+}
+#name {
+    position: absolute;
+    width: 75%;
+    height: 50%;
+    bottom: 10%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1.6vh;
+    letter-spacing: 0.5px;
+    color: white;
+    background: transparent;
+}
+#hair {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 25%;
+    bottom: 25%;
+    left: 16%;
+    font-family: "junicode";
+    text-align: center;
+    font-weight: 400;
+   font-size: 1.3vh;
+    letter-spacing: 0.5px;
+    color: white;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    background: url(/ui/assets/toast_bg2.png) center / cover no-repeat;
+    user-select: none;
+}
+#cityname {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 35%;
+    bottom: 19%;
+    left: 16%;
+    font-family: "junicode";
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.3vh;
+    letter-spacing: 0.5px;
+    color: white;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    background: url(/ui/assets/toast_bg2.png) center / cover no-repeat;
+    user-select: none;
+}
+#eye {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 25%;
+    bottom: 25%;
+    left: 57%;
+    font-family: "junicode";
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.5vh;
+    letter-spacing: 0.5px;
+    color: white;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    background: url(/ui/assets/toast_bg2.png) center / cover no-repeat;
+    user-select: none;
+}
+#religious {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23%;
+    height: 35%;
+    bottom: 19%;
+    left: 60%;
+    font-family: "junicode";
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.3vh;
+    letter-spacing: 0.5px;
+    color: white;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    background: url(/ui/assets/toast_bg2.png) center / cover no-repeat;
+    user-select: none;
+}
+
+#ageinput {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 40%;
+    bottom: 15%;
+    left: 15%;
+    font-family: "junicode";
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.3vh;
+    letter-spacing: 0.5px;
+    color: white;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    background: url(/ui/assets/toast_bg2.png) center / cover no-repeat;
+    user-select: none;
+}
+#heightinput {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 40%;
+    bottom: 15%;
+    left: 22.5%;
+    font-family: "junicode";
+    text-align: center;
+    font-weight: 400;
+  font-size: 1.3vh;
+    letter-spacing: 0.5px;
+    color: white;
+    filter: drop-shadow(0 0 0.25rem rgb(231, 227, 227));
+    background: url(/ui/assets/toast_bg2.png) center / cover no-repeat;
+    user-select: none;
+}
+#weightinput {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 40%;
+    bottom: 15%;
+    left: 65%;
+    font-family: "junicode";
+    text-align: center;
+    font-weight: 400;
+  font-size: 1.3vh;
+    letter-spacing: 0.5px;
+    color: white;
+    filter: drop-shadow(0 0 0.25rem rgb(231, 227, 227));
+    background: url(/ui/assets/toast_bg2.png) center / cover no-repeat;
+    user-select: none;
+}
+
+.height-tick {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 40%;
+    background: url(/ui/assets/menu_icon_tick.png) center / cover no-repeat;
+}
+#dateinput {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    height: 40%;
+    bottom: 15%;
+    left: 35%;
+    font-family: "junicode";
+    text-align: center;
+    font-weight: 400;
+   font-size: 1.3vh;
+    letter-spacing: 0.5px;
+    color: white;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    background: url(/ui/assets/toast_bg2.png) center / cover no-repeat;
+    user-select: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+    position:absolute;
+    right:15px;
+    background-image: url('/ui/assets/menu_icon_tick.png');
+}
+.age-label {
+    position: absolute;
+    font-family: "junicode";
+    font-weight: 400;
+    font-size: 1.6vh;
+    top: 48%;
+    left: 2%;
+}
+#hairicon {
+    position: absolute;
+    width: 12%;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    top: 40%;
+    left: 2%;
+}
+#cityicon {
+    position: absolute;
+    width: 11%;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    top: 40%;
+    left: 2%;
+}
+#religiousicon {
+    position: absolute;
+    width: 9.5%;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    top: 40%;
+    left: 48%;
+}
+#eyeicon {
+    position: absolute;
+    width: 10%;
+    filter: drop-shadow(0 0 0.35rem rgb(231, 227, 227));
+    top: 45%;
+    left: 44%;
+}
+.height-label {
+    position: absolute;
+    font-family: "junicode";
+    font-weight: 400;
+    font-size: 1.6vh;
+    top: 48%;
+    left: 2%;
+}
+.weight-label {
+    position: absolute;
+    font-family: "junicode";
+    font-weight: 400;
+    font-size: 1.6vh;
+    top: 48%;
+    left: 47%;
+}
+
+input::placeholder {
+    color: #8f8f8f;
+    font-family: "junicode";
+    font-weight: 400;
+    font-size: 1.3vh;
+    user-select: none;
+}
+
+
+#ageinput::placeholder {
+    text-align: center;
+    font-size: 1.3vh;
+}
+
+.line {
+    position: absolute;
+    width: 80%;
+    height: 10%;
+    bottom: 0%;
+    left: 2%;
+    background-color: aqua;
+    background: url(/ui/assets/line.png) center / cover no-repeat;
+}
+
+input[type=checkbox] {
+    position: relative;
+      cursor: pointer;
+}
+
+#sex-man {
+    content: "";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    top: 49%;
+    left: 17%;
+    border-radius: 50px;
+    background-color: rgb(207, 202, 202);
+}
+
+#sex-women {
+    content: "";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    top: 49%;
+    left: 62%;
+    border-radius: 50px;
+    background-color: rgb(207, 202, 202);
+}
+
+input[type=checkbox]:checked:after {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 2px;
+    border: solid black;
+    border-width: 0px 10px 10px 0;
+    border-radius: 50px;
+    position: absolute;
+    box-shadow: rgb(255, 255, 255) 0px 0px 10px 10px;
+}
+
+.mantext {
+    position: absolute;
+    font-family: "junicode";
+    font-weight: 400;
+    font-size: 1.6vh;
+    top: 48%;
+    left: 2%;
+}
+.womantext {
+    position: absolute;
+    font-family: "junicode";
+    font-weight: 400;
+    font-size: 1.6vh;
+    top: 48%;
+    left: 40%;
+}
+
+#submit {
+    position: absolute;
+    width: 20%;
+    height: 5%;
+    bottom: 5.5%;
+    background-color: white;
+    font-family: "western";
+    font-weight: 400;
+    font-size: 2.5vh;
+    transition: all ease 0.5s;
+    background: transparent;
+    color: white;
+}
+
+#submit:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 0.75rem rgb(87, 87, 87));
+    border-bottom: 1px solid white;
+
+}
+#submit:active {
+    transition: all ease 0s;
+    transform: scale(0.95);
+}
+
+@media (max-width:1920px) {
+    .create {
+        width: 22%;
+        height:65%;
+        top: 50%;
+        left: 50%;
+    }
+    .label {
+        position: absolute;
+        top: 7%;
+        left: 2%;
+        font-weight: 400;
+        font-size: 1.9vh;
+    }
+    input::placeholder {
+        font-size: 1.5vh;
+    } 
+    #ageinput::placeholder {
+        font-size: 1.5vh;
+    }
+    #sex-man {
+        width: 19px;
+        height: 19px;
+    }
+    #sex-women {
+        width: 19px;
+        height: 19px;
+    }    
+    input[type=checkbox]:checked:after {
+        width: 2px;
+        height: 2px;
+    }
+}

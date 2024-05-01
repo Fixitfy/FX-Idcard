@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fixitfy ID Card</title>
+        <link rel="stylesheet" href="/ui/style.css">
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    </head>
+<body>
+    <div class="previewcreate-photo">
+        <img id="previewphoto" src="/ui/assets/printphoto.png" alt="" srcset="">
+        <img id="preview-frame" src="/ui/assets/preview-frame.png" alt="" srcset="">
+    </div>
+    <div class="create">
+        <button class="close-create"></button>
+        <h1>ID CARD</h1>
+        <h2>To create an ID card, fill in the following information</h2>
+        <img id="usaflag" src="/ui/assets/flag1899.png" alt="" srcset="">
+        <div class="name-cont">
+            <span class="label">NAME / SURNAME</span>
+            <input type="text" name="" id="name" value="Louis Cunnigham">
+            <div class="line"></div>
+        </div>
+        <div class="city-cont">
+            <span class="label">Place of birth / Religious</span>
+            <img id="cityicon" src="/ui/assets/city.png" alt="" srcset="">
+            <input type="text" name="" id="cityname" value="Blackwater" disabled>
+            <img id="religiousicon" src="/ui/assets/cross.png" alt="" srcset="">
+            <input type="text" name="" id="religious" value="Christian">
+            <div class="line"></div>
+        </div>
+        <div class="sex-cont">
+            <span class="label">Sex</span>
+            <span class="mantext">Man:</span>
+            <input type="checkbox" name="" id="sex-man" disabled>
+            <span class="womantext">Woman:</span>
+            <input type="checkbox" name="" id="sex-women" disabled>
+            <div class="line"></div>
+        </div>
+        <div class="age-cont">
+            <span class="label">Date of Birth</span>
+            <span class="height-label">Age:</span>
+            <input type="text" name="" id="ageinput" value="29" disabled>
+            <input type="date" id="dateinput" name="trip-start" min="1820-01-01" max="1899-12-31" />
+            <div class="line"></div>
+        </div>
+        <div class="body-cont">
+            <span class="label">Height / Weight</span>
+            <span class="age-label">Height:</span>
+            <input type="text" name="" id="heightinput" value="5'1" disabled>
+            <div class="height-tick"></div>
+            <span class="weight-label">Weight:</span>
+            <input type="text" name="" id="weightinput" value="80kg">
+            <div class="line"></div>
+        </div>
+        <div class="hair-cont">
+            <span class="label">Hair / Eyes Color</span>
+            <img id="hairicon" src="/ui/assets/hairicon.png" alt="" srcset="">
+            <input type="text" name="" id="hair" value="Black">
+            <img id="eyeicon" src="/ui/assets/eyeicon.png" alt="" srcset="">
+            <input type="text" name="" id="eye" value="Blue">
+            <div class="line"></div>
+        </div>
+        <button id="submit" type="button">SUBMIT</button>
+    </div>
+    <div class="printphoto">
+        <img class="photo" src="https://i.hizliresim.com/950uitk.png" alt="" srcset="">
+        <div class="photo-frame"></div>
+        <input type="text" name="link" id="link" placeholder="https://upload.fixitfy.com.tr/">
+        <button class="preview">PREVIEW</button>
+        <button class="print">PRINT</button>
+        <button class="close"></button>
+    </div>
+    <div class="photograph">
+        <img class="photo" src="https://i.hizliresim.com/950uitk.png" alt="" srcset="">
+        <div class="photo-frame"></div>
+    </div>
+    <div class="id-card">
+        <img class="playerimg" src="https://i.hizliresim.com/950uitk.png" alt="" srcset="">
+        <img class="frame" src="/ui/assets/frame.png" alt="" srcset="">
+        <span class="charid">NODATA</span>
+        <span class="sex">NODATA</span>
+        <span class="hair">NODATA</span>
+        <span class="eyes">NODATA</span>
+        <span class="height">NODATA</span>
+        <span class="weight">NODATA</span>
+        <span class="religious">NODATA</span>
+        <span class="dateofbirth">NODATA</span>
+        <span class="age">NODATA</span>
+        <span class="license">NODATA</span>
+        <span class="name">NODATA</span>
+        <div class="server-logo"></div>
+        <div class="country">U.S.A</div>
+        <div class="card-zone">NODATA</div>
+    </div>
+</body>
+<script src="/ui/main.js" type="text/javascript"></script>
+</html>
