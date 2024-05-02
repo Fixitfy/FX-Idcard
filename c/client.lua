@@ -342,7 +342,7 @@ local function createBlip(v)
     SetBlipScale(blip, v.blips.scale)
     Citizen.InvokeNative(0x9CB1A1623062F402, blip, v.blips.name)
     return blip
-endsssss
+end
 
 local function checkNPCS()
     local ped = PlayerPedId()
