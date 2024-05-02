@@ -1,6 +1,6 @@
 author 'Fixitfy'
 description 'Fixitfy Advanced IDCard'
-version '1.0'
+version '1.1'
 lua54 'yes'
 fx_version "adamant"
 games {"rdr3"}
@@ -28,8 +28,5 @@ files {
 }
 
 escrow_ignore {
-    'config.lua',
-    's/opensource.lua',
-    'framework/*.lua'
+    '**/*'
 }
-dependency '/assetpacks'
