@@ -17,7 +17,7 @@ https://upload.fixitfy.com.tr/
 - Read the fx_idcard sql file to your database.
 - Put your item images into your inventory.
 - Write ensure fx-idcard at the bottom of your server.cfg file and restart the server
-- 
+
 ## For RSGCore
 - go to RSG-core/shared/items.lua
 - Add the following code at the bottom of the file.
