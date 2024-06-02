@@ -79,7 +79,7 @@ FXRegisterUsableItem(Config.PrintPhotoItem,function(data)
             data = {
                 name= data.firstname.." "..data.lastname,
                 age = data.age,
-                gender = data.sex,
+                sex = data.sex,
                 charid=Character.charIdentifier,
                 height = data.height,
                 weight = data.weight,
