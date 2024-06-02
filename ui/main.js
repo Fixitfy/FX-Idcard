@@ -67,10 +67,10 @@ $(document).ready(function () {
         $("#religious").val(data.religious);
         $("#ageinput").val(data.age);
         $("#weightinput").val(`${data.weight}KG`);
-        if (data.gender === "Male") {
+        if (data.sex === "Male") {
             $("#sex-man").prop("checked", true);
             $("#sex-women").prop("checked", false);
-        } else if (data.gender === "Female") {
+        } else if (data.sex === "Female") {
             $("#sex-women").prop("checked", true);
             $("#sex-man").prop("checked", false);
         }
