@@ -9,9 +9,6 @@ if Config.Framework == "VORP" then
         VorpInv = exports.vorp_inventory:vorp_inventoryApi()
         
         function FXRegisterUsableItem(itemname,callBack)
-            -- ---@alias itemdata {source:number, item:{metadata:table , mainid:number, description:string},id:number,label:string}
-            -- ---@param item string unique item name
-            -- ---@param callback fun(itemdata)
             exports.vorp_inventory:registerUsableItem(itemname, function(data)
                 local array = {
                     source = data.source,
@@ -146,7 +143,7 @@ elseif Config.Framework == "RSG" then
         
         function FXAddItem(src,itemName,itemCount,Metadata)
             local Player = RSGCore.Functions.GetPlayer(src)
-            Player.Functions.AddItem(itemName, itemCount,Metadata)
+            Player.Functions.AddItem(itemName, itemCount,false,Metadata)
         end
         function FXHaveMoney(src,moneytype,count)
             local Player = RSGCore.Functions.GetPlayer(src)
