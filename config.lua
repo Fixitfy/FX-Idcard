@@ -79,6 +79,38 @@ Config.Locale = {
         ["successdelete"] = "IDCard has been deleted successful",
         ["nojob"] = "You have no authorisation!",
         ["errorcommand"] = "Incorrect usage. use this way /deleteidcard id",
+    },
+    ["fr"] = {
+        --- PROMPTS ---
+        ["promptitle"] = "Photographe",
+        ["promptitle2"] = "Service de carte d'identité",
+        ["takephoto"] = "Prendre une photo",
+        ["printphoto"] = "Imprimer une photo",
+        ["exit"] = "Annuler",
+        ["camUp"] = "Haut",
+        ["camDown"] = "Bas",
+        ["camLeft"] = "Gauche",
+        ["camRight"] = "Droite",
+        ["camForward"] = "Avant",
+        ["camBack"] = "Arrière",
+        ["promptitle2"] = "Système de carte d'identité",
+        ["takeidcard"] = "Obtenez votre pièce d'identité",
+        --- NOTIFY -----
+        ["noimg"] = "Aucun ~COLOR_YELLOW~lien~COLOR_WHITE~ de photo saisi !",
+        ["successprint"] = "Votre photo d'identité a été ajoutée à votre inventaire, vous pouvez la regarder avec un ~COLOR_YELLOW~double click~COLOR_WHITE~ dessus.",
+        ["addIdCard"] = "Votre carte d'identité a été ajoutée à votre inventaire, vous pouvez la regarder avec un ~COLOR_YELLOW~double click~COLOR_WHITE~ dessus.",
+        ["errorprint"] = "~COLOR_RED~Échec de l'impression de la photo !",
+        ["erroridcard"] = "~COLOR_RED~La carte d'identité n'a pas pu être créée !",
+        ["photodesc"] = "Photo d'identité",
+        ["nodata"] = "Vous n'avez aucune pièce d'identité !",
+        ["nomoney"] = "Vous n'avez pas assez d'argent. Coût : ~COLOR_YELLOW~${money}}",
+        ["successidcard"] = "Votre carte d'identité a été enregistrée. Vous pouvez la présenter",
+        ["useitem"] = "Vous avez ~COLOR_YELLOW~${time} ~COLOR_WHITE~secondes pour choisir votre photo d'identité",
+        ["alreadyidcard"] = "Vous avez déjà une carte d'identité. Vous devez obtenir une autorisation pour la modifier",
+        ["idcarddesc"] = "Carte d'identité de ${name} </br>Numéro d'identification : <span style=color:yellow;>${charid}",
+        ["successdelete"] = "La carte d'identité a été supprimée avec succès",
+        ["nojob"] = "Vous n'êtes pas autorisé à faire cela !",
+        ["errorcommand"] = "Utilisation incorrecte. Commande : /deleteidcard id",
     }
 }
 Config.HideHud = function()
