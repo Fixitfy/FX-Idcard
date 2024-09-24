@@ -137,7 +137,7 @@ RegisterNetEvent("fx-idcard:client:PreviewPhoto", function(typee, data)
         })
     end
 end)
-RegisterNetEvent("fx-idcard:client:CreateIdcardUi", function(data)
+RegisterNetEvent("fx-idcard:client:CreateIdcardUi", function(data, illegal)
     creating = true
     Config.HideHud()
     AnimpostfxPlay("OJDominoBlur")
@@ -145,7 +145,8 @@ RegisterNetEvent("fx-idcard:client:CreateIdcardUi", function(data)
     SetNuiFocus(true,true)
     SendNUIMessage({
         action = 'createidcard',
-        array = data
+        array = data,
+        illegal = illegal
     })
 end)
 
@@ -357,7 +358,7 @@ local function checkNPCS()
             v.npc = nil
             v.canInteract = nil
         end
-        if not v.blip then
+        if v.blips and not v.blip then
             v.blip = createBlip(v)
         end 
         if v.blip then
@@ -387,6 +388,11 @@ Citizen.CreateThread(function()
                 local title = CreateVarString(10, 'LITERAL_STRING',Locale("promptitle2"))
                 if Config.Prices.idcard then
                     title = CreateVarString(10, 'LITERAL_STRING',Locale("promptitle2").." $"..Config.Prices.idcard)
+                    if v.illegal then
+                        if Config.Prices.illegal then
+                            title = CreateVarString(10, 'LITERAL_STRING',Locale("promptitle3").." $"..Config.Prices.illegal)
+                        end
+                    end
                 end
                 PromptSetActiveGroupThisFrame(prompts2, title)
                 if PromptHasHoldModeCompleted(movements2[1]) then
@@ -403,6 +409,7 @@ Citizen.CreateThread(function()
         Wait(sleep)
     end
 end)
+
 AddEventHandler('onResourceStop', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then
         return
@@ -426,3 +433,4 @@ AddEventHandler('onResourceStop', function(resourceName)
         AnimpostfxStop("OJDominoBlur")
     end
 end)
+

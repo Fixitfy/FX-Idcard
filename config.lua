@@ -1,7 +1,7 @@
 Config = {}
 Config.Language = "en"
 Config.Framework = "VORP" --- VORP - RSG
-Config.TakeCardType = "sql" ---- or "item" (If you select item, it will give you a special ID card with metada and you can have more than one ID card. If you select sql, it will be saved in everyone's data and you will be able to create id card only 1 time.)
+Config.TakeCardType = "item" ---- or "sql" (If you select item, it will give you a special ID card with metada and you can have more than one ID card. If you select sql, it will be saved in everyone's data and you will be able to create id card only 1 time.)
 Config.Keybinds = {
     ["takephoto"] = 0x760A9C6F,
     ["exit"] = 0x156F7119,
@@ -33,6 +33,7 @@ Config.Locale = {
         ["camForward"] = "Forward",
         ["camBack"] = "Back",
         ["promptitle2"] = "Identity Card System",
+        ["promptitle3"] = "Illegal Identity Card",
         ["takeidcard"] = "Take Id Card",
         --- NOTIFY -----
         ["noimg"] = "No picture ~COLOR_YELLOW~link~COLOR_WHITE~ entered !",
@@ -48,6 +49,39 @@ Config.Locale = {
         ["alreadyidcard"] = "You already have an identity card. You need approval to change your ID card",
         ["idcarddesc"] = "${name}'s identity </br>Identity Number: <span style=color:yellow;>${charid}",
     },
+    ["fr"] = {
+        --- PROMPTS ---
+        ["promptitle"] = "Photographe",
+        ["promptitle2"] = "Service de carte d'identité",
+        ["takephoto"] = "Prendre une photo",
+        ["printphoto"] = "Imprimer une photo",
+        ["exit"] = "Annuler",
+        ["camUp"] = "Haut",
+        ["camDown"] = "Bas",
+        ["camLeft"] = "Gauche",
+        ["camRight"] = "Droite",
+        ["camForward"] = "Avant",
+        ["camBack"] = "Arrière",
+        ["promptitle2"] = "Système de carte d'identité",
+        ["promptitle3"] = "Illegal Identity Card",
+        ["takeidcard"] = "Obtenez votre pièce d'identité",
+        --- NOTIFY -----
+        ["noimg"] = "Aucun ~COLOR_YELLOW~lien~COLOR_WHITE~ de photo saisi !",
+        ["successprint"] = "Votre photo d'identité a été ajoutée à votre inventaire, vous pouvez la regarder avec un ~COLOR_YELLOW~double click~COLOR_WHITE~ dessus.",
+        ["addIdCard"] = "Votre carte d'identité a été ajoutée à votre inventaire, vous pouvez la regarder avec un ~COLOR_YELLOW~double click~COLOR_WHITE~ dessus.",
+        ["errorprint"] = "~COLOR_RED~Échec de l'impression de la photo !",
+        ["erroridcard"] = "~COLOR_RED~La carte d'identité n'a pas pu être créée !",
+        ["photodesc"] = "Photo d'identité",
+        ["nodata"] = "Vous n'avez aucune pièce d'identité !",
+        ["nomoney"] = "Vous n'avez pas assez d'argent. Coût : ~COLOR_YELLOW~${money}}",
+        ["successidcard"] = "Votre carte d'identité a été enregistrée. Vous pouvez la présenter",
+        ["useitem"] = "Vous avez ~COLOR_YELLOW~${time} ~COLOR_WHITE~secondes pour choisir votre photo d'identité",
+        ["alreadyidcard"] = "Vous avez déjà une carte d'identité. Vous devez obtenir une autorisation pour la modifier",
+        ["idcarddesc"] = "Carte d'identité de ${name} </br>Numéro d'identification : <span style=color:yellow;>${charid}",
+        ["successdelete"] = "La carte d'identité a été supprimée avec succès",
+        ["nojob"] = "Vous n'êtes pas autorisé à faire cela !",
+        ["errorcommand"] = "Utilisation incorrecte. Commande : /deleteidcard id",
+    },
     ["tr"] = {
         --- PROMPTS ---
         ["promptitle"] = "Kamera Konumunu Ayarla",
@@ -62,6 +96,7 @@ Config.Locale = {
         ["camForward"] = "Yakinlastir",
         ["camBack"] = "Uzaklastir",
         ["promptitle2"] = "Kimlik Karti Sistemi",
+        ["promptitle3"] = "Illegal Identity Card",
         ["takeidcard"] = "Kimligini Al",
         --- NOTIFY -----
         ["noimg"] = "Fotograf ~COLOR_YELLOW~linki~COLOR_WHITE~ girilmemis!",
@@ -82,15 +117,16 @@ Config.Locale = {
     }
 }
 Config.HideHud = function()
-	exports['fx-hud']:hideHud()
+	-- exports['fx-hud']:hideHud()
 end
 Config.ShowHud = function()
-	exports['fx-hud']:showHud()
+	-- exports['fx-hud']:showHud()
 end
 
 Config.Prices = { -- cash
     printphoto = 5, -- or false (if false == free)
     idcard = 50, -- or false if false == free)
+    illegal = 100, -- or false if false == free)
 }
 
 Config.DeletePlayerDataCommand = "deleteidcard" -- /deleteidcard (id)      (Only admin or job "judge" check this s/opnesource.lua)
@@ -109,7 +145,7 @@ Config.Photographers = {
     },
 }
 
-Config.PedSpawnDistance = 15
+Config.PedSpawnDistance = 30
 Config.Religious = {"Christian"} -- {"Christian","Muslim","Jewish"} 
 Config.IDCardNPC = {
     ["Blackwater"] = {
@@ -117,7 +153,7 @@ Config.IDCardNPC = {
         models = "cs_brontesbutler",
         distance = 3,
         blips = {
-            name = "KIMLIK ISLEMLERI",
+            name = "IDENTITY PROCESS",
             sprite = -1656531561,
             scale = 0.6,
             modifier = "BLIP_MODIFIER_MP_COLOR_32",
@@ -138,7 +174,7 @@ Config.IDCardNPC = {
         models = "cs_brontesbutler",
         distance = 3,
         blips = {
-            name = "KIMLIK ISLEMLERI",
+            name = "IDENTITY PROCESS",
             sprite = -1656531561,
             scale = 0.6,
             modifier = "BLIP_MODIFIER_MP_COLOR_32",
@@ -159,7 +195,7 @@ Config.IDCardNPC = {
         models = "cs_brontesbutler",
         distance = 3,
         blips = {
-            name = "KIMLIK ISLEMLERI",
+            name = "IDENTITY PROCESS",
             sprite = -1656531561,
             scale = 0.6,
             modifier = "BLIP_MODIFIER_MP_COLOR_32",
@@ -180,7 +216,7 @@ Config.IDCardNPC = {
         models = "cs_brontesbutler",
         distance = 3,
         blips = {
-            name = "KIMLIK ISLEMLERI",
+            name = "IDENTITY PROCESS",
             sprite = -1656531561,
             scale = 0.6,
             modifier = "BLIP_MODIFIER_MP_COLOR_32",
@@ -201,7 +237,7 @@ Config.IDCardNPC = {
         models = "cs_brontesbutler",
         distance = 3,
         blips = {
-            name = "KIMLIK ISLEMLERI",
+            name = "IDENTITY PROCESS",
             sprite = -1656531561,
             scale = 0.6,
             modifier = "BLIP_MODIFIER_MP_COLOR_32",
@@ -222,7 +258,7 @@ Config.IDCardNPC = {
         models = "cs_brontesbutler",
         distance = 3,
         blips = {
-            name = "KIMLIK ISLEMLERI",
+            name = "IDENTITY PROCESS",
             sprite = -1656531561,
             scale = 0.6,
             modifier = "BLIP_MODIFIER_MP_COLOR_32",
@@ -236,7 +272,19 @@ Config.IDCardNPC = {
             close = 21,
             blipmodifier = "BLIP_MODIFIER_MP_COLOR_2",
         },
-
+    },
+    ["IllegalCard"] = {
+        illegal = true,
+        coords = vector4(-813.2076, -1378.4711, 43.6373, 181.3653),
+        fakeLabel = "Rhodes",
+        models = "cs_brontesbutler",
+        distance = 2,
+        blips = false,
+        anims = {
+            dict = "WORLD_HUMAN_SMOKE_NERVOUS_STRESSED",
+            name = false,
+        },
+        timeSettings = false,
     },
 }
 

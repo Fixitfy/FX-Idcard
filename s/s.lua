@@ -74,22 +74,38 @@ FXRegisterUsableItem(Config.PrintPhotoItem,function(data)
     if vesikalikPlease[tostring(src)] then
         local city = vesikalikPlease[tostring(src)]
         vesikalikPlease[tostring(src)] = nil
-        local Character = FXGetPlayerData(src)
-        FXGetCharacterInformations(src, Character.charIdentifier,function(data)
-            data = {
-                name= data.firstname.." "..data.lastname,
-                age = data.age,
-                sex = data.sex,
-                charid=Character.charIdentifier,
-                height = data.height,
-                weight = data.weight,
-                city = city,
-                img = link,
-                religious = Config.Religious[math.random(1,#Config.Religious)],
-            }
-            Wait(1000)
-            TriggerClientEvent("fx-idcard:client:CreateIdcardUi", src, data)
-        end)
+        data = {
+            name= "",
+            age = "",
+            sex = "",
+            charid= "",
+            height = data.height,
+            weight = "73",
+            city = "",
+            img = link,
+            religious = Config.Religious[math.random(1,#Config.Religious)],
+        }
+        if not Config.IDCardNPC[city].illegal then
+            local Character = FXGetPlayerData(src)
+            FXGetCharacterInformations(src, Character.charIdentifier,function(data)
+                data = {
+                    name= data.firstname.." "..data.lastname,
+                    age = data.age,
+                    sex = data.sex,
+                    charid=Character.charIdentifier,
+                    height = data.height,
+                    weight = data.weight,
+                    city = city,
+                    img = link,
+                    religious = Config.Religious[math.random(1,#Config.Religious)],
+                }
+                Wait(1000)
+                TriggerClientEvent("fx-idcard:client:CreateIdcardUi", src, data, false)
+            end)
+        else
+            data.city = Config.IDCardNPC[city].fakeLabel
+            TriggerClientEvent("fx-idcard:client:CreateIdcardUi", src, data, true)
+        end
     else
         TriggerClientEvent("fx-idcard:client:ShowUi", src, "photo", data)
     end
@@ -114,34 +130,50 @@ RegisterNetEvent("fx-idcard:server:ShowIdCard", function(data)
 end)
 
 -- ### Data
--- name, cityname, religious, age, height, weight, hair, eye, sex, img
-RegisterNetEvent('fx-idcard:server:buyIdCard',function(data)
+-- name, cityname, religious, age, height, weight, hair, eye, sex, img, illegal
+RegisterNetEvent('fx-idcard:server:buyIdCard', function(data)
     local src = source
     local Character = FXGetPlayerData(src)
-    if Config.TakeCardType == "sql" then
-        local charid = Character.charIdentifier
-        data.charid = charid
-        if Config.Prices.idcard then
-            local HaveMoney = FXHaveMoney(src, "cash", Config.Prices.idcard)
-            if HaveMoney then
-                FXRemoveMoney(src,"cash",Config.Prices.idcard)
-            else
+    local charid = Character.charIdentifier
+    local price = 0
+    if data.illegal then
+        price = Config.Prices.illegal or 0
+    else
+        price = Config.Prices.idcard or 0
+    end
+    if price > 0 then
+        local HaveMoney = FXHaveMoney(src, "cash", price)
+        if HaveMoney then
+            FXRemoveMoney(src, "cash", price)
+            local photoRemoved = FXRemoveItem(src, Config.PrintPhotoItem, 1, {img = data.img}) -- Metadata eşleşmesini kontrol et
+
+            if not photoRemoved then
                 return Notify({
                     source = src,
-                    text = Locale("nomoney", {money=Config.Prices.idcard}),
-                    type = "success",
+                    text = Locale("noprintphoto"), 
+                    type = "error",
                     time = 4000
                 })
             end
+        else
+            return Notify({
+                source = src,
+                text = Locale("nomoney", {money = price}),
+                type = "error",
+                time = 4000
+            })
         end
-        exports.oxmysql:execute("SELECT * FROM fx_idcard WHERE charid = ?", {charid},function(result)
+    end
+
+    if Config.TakeCardType == "sql" then
+        exports.oxmysql:execute("SELECT * FROM fx_idcard WHERE charid = ?", {charid}, function(result)
             if not result[1] then
                 local Parameters = {
                     ['charid'] = charid,
                     ['data'] = tostring(json.encode(data)),
                 }
                 exports.oxmysql:execute("INSERT INTO fx_idcard (`charid`, `data`) VALUES (@charid, @data)", Parameters)
-                TriggerClientEvent('fx-idcard:client:setData',src,data)
+                TriggerClientEvent('fx-idcard:client:setData', src, data)
                 Notify({
                     source = src,
                     text = Locale("successidcard"),
@@ -161,15 +193,14 @@ RegisterNetEvent('fx-idcard:server:buyIdCard',function(data)
     elseif Config.TakeCardType == "item" then
         local item = Config.ManIdCardItem
         local metadata = {
-            description = Locale("idcarddesc",{
-                name=data.name,
+            description = Locale("idcarddesc", {
+                name = data.name,
                 age = Character.age,
-                charid=Character.charIdentifier,
+                charid = Character.charIdentifier,
             }),
-            -- name, cityname, religious, age, date, height, weight, hair, eye, sex, img
             CardData = {
-                name=data.name,
-                cityname=data.cityname,
+                name = data.name,
+                cityname = data.cityname,
                 religious = data.religious,
                 age = data.age,
                 date = data.date,
@@ -185,20 +216,7 @@ RegisterNetEvent('fx-idcard:server:buyIdCard',function(data)
         if data.sex == "Female" then
             item = Config.WomanIdCardItem
         end
-        if Config.Prices.idcard then
-            local HaveMoney = FXHaveMoney(src, "cash", Config.Prices.idcard)
-            if HaveMoney then
-                FXRemoveMoney(src,"cash",Config.Prices.idcard)
-            else
-                return Notify({
-                    source = src,
-                    text = Locale("nomoney", {money=Config.Prices.idcard}),
-                    type = "success",
-                    time = 4000
-                })
-            end
-        end
-        
+
         FXAddItem(src, item, 1, metadata)
 
         Notify({
@@ -207,6 +225,5 @@ RegisterNetEvent('fx-idcard:server:buyIdCard',function(data)
             type = "success",
             time = 4000
         })
-        
     end
 end)

@@ -4,31 +4,42 @@ $(document).ready(function () {
     $(".printphoto").hide();
     $(".create").hide();
     $(".previewcreate-photo").hide();
-
+    var setIllegal = false
     function setupIDCard(array) {
-        var sex = "M"
-        if (array.sex == "Female"){
+        var sex = "M";
+        if (array.sex == "Female") {
             sex = "F";
         }
-        $(".charid").html(array.charid)
-        $(".license").html(`RODEO-${array.charid}`)
-        $(".sex").html(sex)
-        $(".hair").html(array.hair)
-        $(".eyes").html(array.eye)
-        $(".height").html(array.height)
-        $(".weight").html(array.weight)
-        $(".religious").html(array.religious)
-        $(".dateofbirth").html(array.date)
-        $(".age").html(array.age)
-        $(".name").html(array.name)
-        $(".country").html(array.country)
-        $(".card-zone").html(array.cityname)
-        $(".playerimg").attr("src", array.img)
-        $(".id-card").slideDown(1000)
+        $(".charid").html(array.charid);
+        $(".license").html(`FIXITFY-${array.charid}`);
+        $(".sex").html(sex);
+        $(".hair").html(array.hair);
+        $(".eyes").html(array.eye);
+        $(".height").html(array.height);
+        $(".weight").html(array.weight);
+        $(".religious").html(array.religious);
+        $(".dateofbirth").html(array.date);
+        $(".age").html(array.age);
+        $(".name").html(array.name);
+        $(".country").html(array.country);
+        $(".card-zone").html(array.cityname);
+        $(".playerimg").attr("src", array.img);
+    
+      
+        $(".id-card")
+            .removeClass("animate__animated animate__fadeOutRight") 
+            .addClass("animate__animated animate__fadeInRight") 
+            .show(); 
     }
-
+    
     function closeIDCard() {
-        $(".id-card").slideUp(1000);
+
+        $(".id-card")
+            .removeClass("animate__animated animate__fadeInRight") 
+            .addClass("animate__animated animate__fadeOutRight") 
+            .one('animationend', function() { 
+                $(this).hide();
+            });
     }
     $("#submit").click(function () {
         var name = $("#name").val();
@@ -56,12 +67,14 @@ $(document).ready(function () {
             hair: hair,
             eye: eye,
             sex: sex,
-            img: img
+            img: img,
+            illegal: setIllegal
         }));
         closePrintPhoto();
         $.post(`https://${GetParentResourceName()}/close`, JSON.stringify({}));
     });
-    function CreateIdCardSetData(data) {
+    function CreateIdCardSetData(data, illegal) {
+        setIllegal = illegal
         $("#name").val(data.name);
         $("#cityname").val(data.city);
         $("#religious").val(data.religious);
@@ -169,13 +182,19 @@ $(document).ready(function () {
                 break;
             case 'showphoto':
                 var img = event.data.array.img
-                console.log(img)
                 $(".photograph .photo").attr("src", img);
                 $(".photograph").fadeIn(500);
                 break;
             case 'createidcard':
                 var data = event.data.array
-                CreateIdCardSetData(data)
+                if (event.data.illegal === true) {
+                    $("#cityname").removeAttr("disabled");
+                    $("#heightinput").removeAttr("disabled");
+                    $("#ageinput").removeAttr("disabled");
+                    $("#sex-man").removeAttr("disabled");
+                    $("#sex-women").removeAttr("disabled");
+                }
+                CreateIdCardSetData(data, event.data.illegal)
                 $(".create").fadeIn(500);
                 $(".previewcreate-photo").fadeIn(500);
                 break;
