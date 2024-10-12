@@ -165,6 +165,12 @@ RegisterNetEvent('fx-idcard:server:buyIdCard', function(data)
         end
     end
 
+    if data.illegal then
+        local charidLength = string.len(tostring(charid)) 
+        local randomId = math.random(10^(charidLength-1), (10^charidLength)-1)
+        charid = randomId 
+    end
+
     if Config.TakeCardType == "sql" then
         exports.oxmysql:execute("SELECT * FROM fx_idcard WHERE charid = ?", {charid}, function(result)
             if not result[1] then
@@ -196,7 +202,7 @@ RegisterNetEvent('fx-idcard:server:buyIdCard', function(data)
             description = Locale("idcarddesc", {
                 name = data.name,
                 age = Character.age,
-                charid = Character.charIdentifier,
+                charid = charid, 
             }),
             CardData = {
                 name = data.name,
@@ -209,7 +215,7 @@ RegisterNetEvent('fx-idcard:server:buyIdCard', function(data)
                 hair = data.hair,
                 eye = data.eye,
                 sex = data.sex,
-                charid = Character.charIdentifier,
+                charid = charid, 
                 img = data.img,
             }
         }

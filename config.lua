@@ -1,6 +1,5 @@
 Config = {}
 Config.Language = "en"
-Config.Framework = "VORP" --- VORP - RSG
 Config.TakeCardType = "item" ---- or "sql" (If you select item, it will give you a special ID card with metada and you can have more than one ID card. If you select sql, it will be saved in everyone's data and you will be able to create id card only 1 time.)
 Config.Keybinds = {
     ["takephoto"] = 0x760A9C6F,
@@ -48,6 +47,7 @@ Config.Locale = {
         ["useitem"] = "Use your photo from inventory within ~COLOR_YELLOW~${time} ~COLOR_WHITE~seconds",
         ["alreadyidcard"] = "You already have an identity card. You need approval to change your ID card",
         ["idcarddesc"] = "${name}'s identity </br>Identity Number: <span style=color:yellow;>${charid}",
+        ["noprintphoto"] = "You do not have a passport photo !",
     },
     ["fr"] = {
         --- PROMPTS ---
@@ -81,6 +81,7 @@ Config.Locale = {
         ["successdelete"] = "La carte d'identité a été supprimée avec succès",
         ["nojob"] = "Vous n'êtes pas autorisé à faire cela !",
         ["errorcommand"] = "Utilisation incorrecte. Commande : /deleteidcard id",
+        ["noprintphoto"] = "You do not have a passport photo !",
     },
     ["tr"] = {
         --- PROMPTS ---
@@ -114,6 +115,7 @@ Config.Locale = {
         ["successdelete"] = "IDCard has been deleted successful",
         ["nojob"] = "You have no authorisation!",
         ["errorcommand"] = "Incorrect usage. use this way /deleteidcard id",
+        ["noprintphoto"] = "You do not have a passport photo !",
     }
 }
 Config.HideHud = function()
@@ -293,20 +295,34 @@ function Notify(data)
     local text = data.text
     local time = data.time
     local type = data.type
+    local dict = data.dict
+    local icon = data.icon
+    local color = data.color
+    local core = Framework
     if isServer then
         local src = data.source
-        -- Serverside
-        if Config.Framework == "VORP" then
-            TriggerClientEvent("vorp:TipBottom",src, text, time, type)
-        elseif Config.Framework == "RSG" then
-            RSGCore.Functions.Notify(src, text, type)
+        if Framework == "RSG" then
+            TriggerClientEvent('ox_lib:notify', src, {title = text, type = type, duration = 5000 })
+            -- RSGCore.Functions.Notify(src, text, type)
+        elseif Framework == "VORP" then
+            if icon then
+                TriggerClientEvent('vorp:ShowAdvancedRightNotification', src, text,dict,icon,color,time)            
+            else
+                TriggerClientEvent("fx-hud:client:showNotify",src, text, time, type)
+                -- TriggerClientEvent("vorp:TipBottom",src, text, time, type)
+            end
         end
     else
-        -- Clientside
-        if Config.Framework == "VORP" then
-            TriggerEvent("vorp:TipBottom", text, time, type)
-        elseif Config.Framework == "RSG" then
-            RSGCore.Functions.Notify(text, type)
+        if Framework == "RSG" then
+            lib.notify({ title = text, type = type, duration = 5000 })
+            -- RSGCore.Functions.Notify(text, type)
+        elseif Framework == "VORP" then
+            if icon then
+                TriggerEvent("vorp:ShowAdvancedRightNotification", text,dict,icon,color,time)
+            else
+                TriggerEvent("fx-hud:client:showNotify", text, time, type)
+                -- TriggerEvent("vorp:TipBottom", text, time, type)
+            end
         end
     end
 end

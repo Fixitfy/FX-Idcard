@@ -1,4 +1,35 @@
-if Config.Framework == "VORP" then
+Framework = "VORP"
+onPlayerLoadEvent = "vorp:SelectedCharacter" --- Default Framework don't change !
+LoadTimeout = 30 -- How many seconds after the character is loaded will hud load
+if IsDuplicityVersion() then
+    --- SELECT FRAMEWORK ----
+    Citizen.CreateThread(function()
+        local vorpResource = GetResourceState('vorp_core')
+        local rsgResource = GetResourceState('rsg-core')
+
+        if vorpResource == 'started' then
+            Framework = "VORP"
+        elseif rsgResource == 'started' then
+            Framework = "RSG"
+            LoadTimeout = 5
+            onPlayerLoadEvent = "RSGCore:Client:OnPlayerLoaded"
+        else
+            Citizen.CreateThread(function()
+                while true do
+                    Citizen.Wait(2000) 
+                    print("^1[ERROR]^0 No suitable framework found. ^2Please install ^3vorp_core^2 or ^3rsg-core^2.")
+                    print("^1[ERROR]^0 If you have one of these frameworks, make sure to start ^3fx-hud^0 after the frameworks in your ^2server.cfg^0 file.")                    
+                end
+            end)
+        end
+        if Framework then
+            Citizen.Wait(5000) 
+            print("^2[INFO]^0 Framework selected: ^3" .. Framework .. "^0")
+        end
+    end)
+end
+
+if Framework == "VORP" then
     if IsDuplicityVersion() then
         --[[
             Server Side
@@ -99,7 +130,7 @@ if Config.Framework == "VORP" then
         end)
         
     end
-elseif Config.Framework == "RSG" then
+elseif Framework == "RSG" then
     if IsDuplicityVersion() then
         --[[
             Server Side
@@ -139,6 +170,7 @@ elseif Config.Framework == "RSG" then
             end
             if not foundslot then return false end
             Player.Functions.RemoveItem(itemName, itemCount,foundslot)
+            return true
         end
         
         function FXAddItem(src,itemName,itemCount,Metadata)

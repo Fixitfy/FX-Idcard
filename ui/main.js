@@ -74,12 +74,13 @@ $(document).ready(function () {
         $.post(`https://${GetParentResourceName()}/close`, JSON.stringify({}));
     });
     function CreateIdCardSetData(data, illegal) {
-        setIllegal = illegal
+        setIllegal = illegal;
         $("#name").val(data.name);
         $("#cityname").val(data.city);
         $("#religious").val(data.religious);
         $("#ageinput").val(data.age);
         $("#weightinput").val(`${data.weight}KG`);
+    
         if (data.sex === "Male") {
             $("#sex-man").prop("checked", true);
             $("#sex-women").prop("checked", false);
@@ -87,20 +88,23 @@ $(document).ready(function () {
             $("#sex-women").prop("checked", true);
             $("#sex-man").prop("checked", false);
         }
+    
         $("#sex-man, #sex-women").change(function () {
             var checkedCheckbox = $(this);
             $("#sex-man, #sex-women").not(checkedCheckbox).prop("checked", false);
         });
-        var maxYear = 1899 - data.age;
-        var maxDate = maxYear + "-12-31";
-        var minDate = maxYear + "-01-01";
-        $("#dateinput").attr("max", maxDate);
-        $("#dateinput").attr("min", minDate);
+    
+        if (!illegal) {
+            var maxYear = 1899 - data.age;
+            var maxDate = maxYear + "-12-31";
+            var minDate = maxYear + "-01-01";
+            $("#dateinput").attr("max", maxDate);
+            $("#dateinput").attr("min", minDate);
+            $("#dateinput").val(maxYear + "-01-01");
+        }
+    
         $("#previewphoto").attr("src", data.img);
-        var randomDay = Math.floor(Math.random() * 28) + 1;
-        var randomMonth = Math.floor(Math.random() * 12) + 1;
-        // var randomDate = maxYear + "-" + (randomMonth < 10 ? "0" + randomMonth : randomMonth) + "-" + (randomDay < 10 ? "0" + randomDay : randomDay);
-        $("#dateinput").val(maxYear+"-01-01");
+    
         var heightText = "";
         switch (data.height) {
             case 0.85:
@@ -125,8 +129,10 @@ $(document).ready(function () {
                 heightText = "5'0";
                 break;
         }
+    
         $("#heightinput").val(heightText);
     }
+    
     function closePrintPhoto() {
         $(".photograph").fadeOut(500);
         $(".printphoto").fadeOut(500);
@@ -193,6 +199,8 @@ $(document).ready(function () {
                     $("#ageinput").removeAttr("disabled");
                     $("#sex-man").removeAttr("disabled");
                     $("#sex-women").removeAttr("disabled");
+                    $("#dateinput").removeAttr("min");
+                    $("#dateinput").removeAttr("max");
                 }
                 CreateIdCardSetData(data, event.data.illegal)
                 $(".create").fadeIn(500);
