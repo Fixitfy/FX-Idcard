@@ -13,17 +13,6 @@ https://upload.fixitfy.com.tr/
 - Put your item images into your inventory.
 - Write ensure fx-idcard at the bottom of your server.cfg file and restart the server
 
-### SETUP VORP
-- If you are not using RSG Framework and do not have ox_lib, edit the following code as follows;
-```lua
-shared_scripts {
-    -- '@ox_lib/init.lua',
-    "framework/*.lua", 
-    "config.lua",
-    "consumables.lua"
-}
-```
-
 ### Client Show Event
 ```lua
 TriggerClientEvent("fx-idcard:client:showIDCardSQL")
