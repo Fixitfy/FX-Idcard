@@ -412,13 +412,13 @@ end)
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() == resourceName then
         SetTimeout(2000, function()
-            TriggerServerEvent('fx-hud:server:requestFramework')
+            TriggerServerEvent('fx-idcard:server:requestFramework')
         end)
     end
 end)
 
-RegisterNetEvent('fx-hud:client:receiveFramework')
-AddEventHandler('fx-hud:client:receiveFramework', function(receivedFramework)
+RegisterNetEvent('fx-idcard:client:receiveFramework')
+AddEventHandler('fx-idcard:client:receiveFramework', function(receivedFramework)
     Framework = receivedFramework
 end)
 

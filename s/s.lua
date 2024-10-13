@@ -1,9 +1,9 @@
 local vesikalikPlease = {}
 
-RegisterNetEvent('fx-hud:server:requestFramework')
-AddEventHandler('fx-hud:server:requestFramework', function()
+RegisterNetEvent('fx-idcard:server:requestFramework')
+AddEventHandler('fx-idcard:server:requestFramework', function()
     local src = source
-    TriggerClientEvent('fx-hud:client:receiveFramework', src, Framework)
+    TriggerClientEvent('fx-idcard:client:receiveFramework', src, Framework)
 end)
 
 

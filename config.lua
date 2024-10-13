@@ -306,7 +306,7 @@ function Notify(data)
             if icon then
                 TriggerClientEvent('vorp:ShowAdvancedRightNotification', src, text, dict, icon, color, time)
             else
-                TriggerClientEvent("fx-hud:client:showNotify", src, text, time, type)
+                TriggerClientEvent("vorp:TipBottom",src, text, time, type)
             end
         end
     else
@@ -316,7 +316,7 @@ function Notify(data)
             if icon then
                 TriggerEvent("vorp:ShowAdvancedRightNotification", text, dict, icon, color, time)
             else
-                TriggerEvent("fx-hud:client:showNotify", text, time, type)
+                TriggerEvent("vorp:TipBottom", text, time, type)
             end
         end
     end
