@@ -8,20 +8,18 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 lua54 'yes'
 
 shared_scripts {
-    '@ox_lib/init.lua',
-    "framework/*.lua", 
-    "config.lua",
-    "consumables.lua"
+    "framework/*.lua",  
+    "config.lua",       
 }
 
 client_scripts {
-    'c/*.lua'
+    'c/*.lua'  
 }
 
 server_scripts {
-    '@oxmysql/lib/MySQL.lua',
-    's/*.lua',
-    "versionchecker.lua"
+    '@oxmysql/lib/MySQL.lua', 
+    's/*.lua',                        
+    "versionchecker.lua"       
 }
 
 ui_page 'ui/index.html'

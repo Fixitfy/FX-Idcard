@@ -290,49 +290,46 @@ Config.IDCardNPC = {
     },
 }
 
-local isServer = IsDuplicityVersion()
 function Notify(data)
-    local text = data.text
-    local time = data.time
-    local type = data.type
-    local dict = data.dict
-    local icon = data.icon
-    local color = data.color
-    local core = Framework
-    if isServer then
-        local src = data.source
+    local text = data.text or "No message" 
+    local time = data.time or 5000  
+    local type = data.type or "info" 
+    local dict = data.dict or ""
+    local icon = data.icon or ""
+    local color = data.color or 0
+    local src = data.source
+
+    if IsDuplicityVersion() then
         if Framework == "RSG" then
-            TriggerClientEvent('ox_lib:notify', src, {title = text, type = type, duration = 5000 })
-            -- RSGCore.Functions.Notify(src, text, type)
+            TriggerClientEvent('ox_lib:notify', src, { title = text, type = type, duration = time })
         elseif Framework == "VORP" then
             if icon then
-                TriggerClientEvent('vorp:ShowAdvancedRightNotification', src, text,dict,icon,color,time)            
+                TriggerClientEvent('vorp:ShowAdvancedRightNotification', src, text, dict, icon, color, time)
             else
-                TriggerClientEvent("fx-hud:client:showNotify",src, text, time, type)
-                -- TriggerClientEvent("vorp:TipBottom",src, text, time, type)
+                TriggerClientEvent("fx-hud:client:showNotify", src, text, time, type)
             end
         end
     else
         if Framework == "RSG" then
-            lib.notify({ title = text, type = type, duration = 5000 })
-            -- RSGCore.Functions.Notify(text, type)
+            TriggerEvent('ox_lib:notify', { title = text, type = type, duration = time })
         elseif Framework == "VORP" then
             if icon then
-                TriggerEvent("vorp:ShowAdvancedRightNotification", text,dict,icon,color,time)
+                TriggerEvent("vorp:ShowAdvancedRightNotification", text, dict, icon, color, time)
             else
                 TriggerEvent("fx-hud:client:showNotify", text, time, type)
-                -- TriggerEvent("vorp:TipBottom", text, time, type)
             end
         end
     end
 end
 
-function Locale(key,subs)
-    local translate = Config.Locale[Config.Language][key] and Config.Locale[Config.Language][key] or "Config.Locale["..Config.Language.."]["..key.."] doesn't exits"
-    subs = subs and subs or {}
+
+function Locale(key, subs)
+    local translate = Config.Locale[Config.Language][key] or "Missing locale: [" .. key .. "]"
+    subs = subs or {}
+
     for k, v in pairs(subs) do
-        local templateToFind = '%${' .. k .. '}'
-        translate = translate:gsub(templateToFind, tostring(v))
+        translate = translate:gsub('%%${' .. k .. '}', tostring(v))
     end
-    return tostring(translate)
+
+    return translate
 end

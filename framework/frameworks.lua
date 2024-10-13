@@ -1,32 +1,28 @@
-Framework = "VORP"
-onPlayerLoadEvent = "vorp:SelectedCharacter" --- Default Framework don't change !
-LoadTimeout = 30 -- How many seconds after the character is loaded will hud load
-if IsDuplicityVersion() then
-    --- SELECT FRAMEWORK ----
-    Citizen.CreateThread(function()
-        local vorpResource = GetResourceState('vorp_core')
-        local rsgResource = GetResourceState('rsg-core')
+Framework = "none"
+onPlayerLoadEvent = "none" 
+LoadTimeout = 30 
 
-        if vorpResource == 'started' then
-            Framework = "VORP"
-        elseif rsgResource == 'started' then
-            Framework = "RSG"
-            LoadTimeout = 5
-            onPlayerLoadEvent = "RSGCore:Client:OnPlayerLoaded"
-        else
-            Citizen.CreateThread(function()
-                while true do
-                    Citizen.Wait(2000) 
-                    print("^1[ERROR]^0 No suitable framework found. ^2Please install ^3vorp_core^2 or ^3rsg-core^2.")
-                    print("^1[ERROR]^0 If you have one of these frameworks, make sure to start ^3fx-hud^0 after the frameworks in your ^2server.cfg^0 file.")                    
-                end
-            end)
-        end
-        if Framework then
-            Citizen.Wait(5000) 
-            print("^2[INFO]^0 Framework selected: ^3" .. Framework .. "^0")
-        end
-    end)
+if IsDuplicityVersion() then
+    local vorpResource = GetResourceState('vorp_core')
+    local rsgResource = GetResourceState('rsg-core')
+    
+    if vorpResource == 'started' then
+        Framework = "VORP"
+        onPlayerLoadEvent = "vorp:SelectedCharacter" 
+    elseif rsgResource == 'started' then
+        Framework = "RSG"
+        LoadTimeout = 5
+        onPlayerLoadEvent = "RSGCore:Client:OnPlayerLoaded"
+    else
+        Citizen.CreateThread(function()
+            while true do
+                Citizen.Wait(2000)
+                print("^1[ERROR]^0 No suitable framework found. ^2Please install ^3vorp_core^2 or ^3rsg-core^2.")
+                print("^1[ERROR]^0 Make sure to start ^3fx-idcard^0 after the frameworks in your ^2server.cfg^0 file.")
+            end
+        end)
+    end
+    print("^2[INFO]^0 Framework selected: ^3" .. Framework .. "^0")
 end
 
 if Framework == "VORP" then
@@ -136,6 +132,7 @@ elseif Framework == "RSG" then
             Server Side
         ]]
         RSGCore = exports['rsg-core']:GetCoreObject()
+
         function FXRegisterUsableItem(itemname,callBack)
             RSGCore.Functions.CreateUseableItem(itemname, function(source,item)
                 local array = {

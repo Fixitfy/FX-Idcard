@@ -49,7 +49,6 @@ Citizen.CreateThread(function()
     movements2 = createPrompts(keysTable2, prompts2)
 end)
 
-
 RegisterNUICallback('close',function()
     SetNuiFocus(false,false)
     AnimpostfxStop("OJDominoBlur")
@@ -397,18 +396,33 @@ Citizen.CreateThread(function()
                 PromptSetActiveGroupThisFrame(prompts2, title)
                 if PromptHasHoldModeCompleted(movements2[1]) then
                     Wait(50)
-                    TriggerServerEvent('fx-idcard:server:useImagePlease', k)
                     Notify({
                         text = Locale("useitem", {time=Config.SelectPhotoTime}),
                         time = 10000,
                         type = "success"
                     })
+                    TriggerServerEvent('fx-idcard:server:useImagePlease', k)
                 end
             end
         end
         Wait(sleep)
     end
 end)
+
+AddEventHandler('onResourceStart', function(resourceName)
+    if GetCurrentResourceName() == resourceName then
+        SetTimeout(2000, function()
+            TriggerServerEvent('fx-hud:server:requestFramework')
+        end)
+    end
+end)
+
+RegisterNetEvent('fx-hud:client:receiveFramework')
+AddEventHandler('fx-hud:client:receiveFramework', function(receivedFramework)
+    Framework = receivedFramework
+end)
+
+
 
 AddEventHandler('onResourceStop', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then

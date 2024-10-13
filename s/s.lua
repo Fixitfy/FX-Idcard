@@ -1,5 +1,12 @@
 local vesikalikPlease = {}
 
+RegisterNetEvent('fx-hud:server:requestFramework')
+AddEventHandler('fx-hud:server:requestFramework', function()
+    local src = source
+    TriggerClientEvent('fx-hud:client:receiveFramework', src, Framework)
+end)
+
+
 RegisterNetEvent("fx-idcard:server:print", function(link)
     local src = source
     if Config.Prices.printphoto then

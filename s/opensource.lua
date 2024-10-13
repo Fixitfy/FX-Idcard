@@ -19,8 +19,6 @@ RegisterCommand(Config.DeletePlayerDataCommand,function(source,args)
                 type = "error",
                 time = 4000
             })
-
-
         end
     else
         Notify({
