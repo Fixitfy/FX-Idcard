@@ -323,13 +323,12 @@ function Notify(data)
 end
 
 
-function Locale(key, subs)
-    local translate = Config.Locale[Config.Language][key] or "Missing locale: [" .. key .. "]"
-    subs = subs or {}
-
-    for k, v in pairs(subs) do
-        translate = translate:gsub('%%${' .. k .. '}', tostring(v))
-    end
-
-    return translate
+function Locale(key,subs)
+  local translate = Config.Locale[Config.Language][key] and Config.Locale[Config.Language][key] or "Config.Locale["..Config.Language.."]["..key.."] doesn't exits"
+  subs = subs and subs or {}
+  for k, v in pairs(subs) do
+      local templateToFind = '%${' .. k .. '}'
+      translate = translate:gsub(templateToFind, tostring(v))
+  end
+  return tostring(translate)
 end
