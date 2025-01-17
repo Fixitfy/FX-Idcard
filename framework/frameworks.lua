@@ -50,7 +50,7 @@ if Framework == "VORP" then
         end
         
         function FXRemoveItem(src,itemName,itemCount,Metadata)
-            return exports.vorp_inventory:subItem(src, itemName, itemCount, Metadata)
+            return exports.vorp_inventory:subItem(src, itemName, itemCount, Metadata, nil, nil, nil)
         end
         
         function FXAddItem(src,itemName,itemCount,Metadata)
