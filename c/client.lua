@@ -409,20 +409,6 @@ Citizen.CreateThread(function()
     end
 end)
 
-AddEventHandler('onResourceStart', function(resourceName)
-    if GetCurrentResourceName() == resourceName then
-        SetTimeout(2000, function()
-            TriggerServerEvent('fx-idcard:server:requestFramework')
-        end)
-    end
-end)
-
-RegisterNetEvent('fx-idcard:client:receiveFramework')
-AddEventHandler('fx-idcard:client:receiveFramework', function(receivedFramework)
-    Framework = receivedFramework
-end)
-
-
 
 AddEventHandler('onResourceStop', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then

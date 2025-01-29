@@ -294,8 +294,8 @@ function Notify(data)
     local text = data.text or "No message" 
     local time = data.time or 5000  
     local type = data.type or "info" 
-    local dict = data.dict or ""
-    local icon = data.icon or ""
+    local dict = data.dict
+    local icon = data.icon
     local color = data.color or 0
     local src = data.source
 
@@ -324,11 +324,11 @@ end
 
 
 function Locale(key,subs)
-  local translate = Config.Locale[Config.Language][key] and Config.Locale[Config.Language][key] or "Config.Locale["..Config.Language.."]["..key.."] doesn't exits"
-  subs = subs and subs or {}
-  for k, v in pairs(subs) do
-      local templateToFind = '%${' .. k .. '}'
-      translate = translate:gsub(templateToFind, tostring(v))
-  end
-  return tostring(translate)
+    local translate = Config.Locale[Config.Language][key] and Config.Locale[Config.Language][key] or "Config.Locale["..Config.Language.."]["..key.."] doesn't exits"
+    subs = subs and subs or {}
+    for k, v in pairs(subs) do
+        local templateToFind = '%${' .. k .. '}'
+        translate = translate:gsub(templateToFind, tostring(v))
+    end
+    return tostring(translate)
 end

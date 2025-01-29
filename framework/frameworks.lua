@@ -1,32 +1,28 @@
+LoadTimeout = 30 
 Framework = "none"
 onPlayerLoadEvent = "none" 
-LoadTimeout = 30 
 
-if IsDuplicityVersion() then
-    local vorpResource = GetResourceState('vorp_core')
-    local rsgResource = GetResourceState('rsg-core')
-    
-    if vorpResource == 'started' then
-        Framework = "VORP"
-        onPlayerLoadEvent = "vorp:SelectedCharacter" 
-    elseif rsgResource == 'started' then
-        Framework = "RSG"
-        LoadTimeout = 5
-        onPlayerLoadEvent = "RSGCore:Client:OnPlayerLoaded"
-    else
-        Citizen.CreateThread(function()
-            while true do
-                Citizen.Wait(2000)
-                print("^1[ERROR]^0 No suitable framework found. ^2Please install ^3vorp_core^2 or ^3rsg-core^2.")
-                print("^1[ERROR]^0 Make sure to start ^3fx-idcard^0 after the frameworks in your ^2server.cfg^0 file.")
-            end
-        end)
-    end
+if GetResourceState('vorp_core') == 'started' then
+    Framework = "VORP"
+    onPlayerLoadEvent = "vorp:SelectedCharacter" 
     print("^2[INFO]^0 Framework selected: ^3" .. Framework .. "^0")
+elseif GetResourceState('rsg-core') == 'started' then
+    Framework = "RSG"
+    LoadTimeout = 5
+    onPlayerLoadEvent = "RSGCore:Client:OnPlayerLoaded"
+    print("^2[INFO]^0 Framework selected: ^3" .. Framework .. "^0")
+else
+    Citizen.CreateThread(function()
+        while true do
+            Citizen.Wait(2000)
+            print("^1[ERROR]^0 No suitable framework found. ^2Please install ^3vorp_core^2 or ^3rsg-core^2.")
+            print("^1[ERROR]^0 Make sure to start ^3fx-idcard^0 after the frameworks in your ^2server.cfg^0 file.")
+        end
+    end)
 end
 
-if Framework == "VORP" then
-    if IsDuplicityVersion() then
+if IsDuplicityVersion() then
+    if Framework == "VORP" then
         --[[
             Server Side
         ]]
@@ -49,9 +45,16 @@ if Framework == "VORP" then
             exports.vorp_inventory:closeInventory(src)
         end
         
-        function FXRemoveItem(src,itemName,itemCount,Metadata)
-            return exports.vorp_inventory:subItem(src, itemName, itemCount, Metadata, nil, nil, nil)
+        function FXRemoveItem(src, itemName, itemCount, Metadata, ItemId)
+            Metadata = Metadata or {}
+            if ItemId then
+                return exports.vorp_inventory:subItemById(src, ItemId)
+            else
+                return exports.vorp_inventory:subItem(src, itemName, itemCount, Metadata)
+            end
         end
+        
+        
         
         function FXAddItem(src,itemName,itemCount,Metadata)
             return exports.vorp_inventory:addItem(src, itemName, itemCount, Metadata)
@@ -114,20 +117,7 @@ if Framework == "VORP" then
             return array
         end
     
-    else
-    --[[
-        Client Side
-    ]]    
-    
-        VorpCore = exports.vorp_core:GetCore()
-        
-        RegisterNetEvent('vorp:SelectedCharacter',function()
-            TriggerServerEvent('fx-idcard:server:GetData')
-        end)
-        
-    end
-elseif Framework == "RSG" then
-    if IsDuplicityVersion() then
+    elseif Framework == "RSG" then
         --[[
             Server Side
         ]]
@@ -243,16 +233,21 @@ elseif Framework == "RSG" then
             }
             return array
         end
-    else
-    --[[
-        Client Side
-    ]]    
+    end    
+else
+    if Framework == "VORP" then
+        VorpCore = exports.vorp_core:GetCore()
+        
+        RegisterNetEvent('vorp:SelectedCharacter',function()
+            TriggerServerEvent('fx-idcard:server:GetData')
+        end)
+    elseif Framework == "RSG" then
         RSGCore = exports['rsg-core']:GetCoreObject()
     
         RegisterNetEvent('RSGCore:Client:OnPlayerLoaded',function()
             TriggerServerEvent('fx-idcard:server:GetData')
         end)
-    end    
+    end
 end
 
 

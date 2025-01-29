@@ -1,6 +1,6 @@
 author 'Fixitfy'
 description 'Fixitfy Advanced IDCard'
-version '1.2'
+version '1.3'
 lua54 'yes'
 fx_version "adamant"
 games {"rdr3"}

@@ -55,6 +55,8 @@ $(document).ready(function () {
         var hair = $("#hair").val();
         var eye = $("#eye").val();
         var sex = "Male";
+        var itemId = $("#previewphoto").attr("data-itemid"); 
+        console.log("Item ID:", itemId);
         if ($("#sex-women").prop('checked')==true){
             sex = "Female";
         }
@@ -71,6 +73,7 @@ $(document).ready(function () {
             eye: eye,
             sex: sex,
             img: img,
+            itemId: itemId,
             illegal: setIllegal
         }));
         closePrintPhoto();
@@ -105,8 +108,10 @@ $(document).ready(function () {
             $("#dateinput").attr("min", minDate);
             $("#dateinput").val(maxYear + "-01-01");
         }
-    
-        $("#previewphoto").attr("src", data.img);
+        console.log(JSON.stringify(data))
+        $("#previewphoto")
+            .attr("src", data.img) 
+            .attr("data-itemid", data.itemId); 
     
         var heightText = "";
         switch (data.height) {

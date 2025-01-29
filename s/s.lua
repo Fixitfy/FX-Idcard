@@ -1,12 +1,5 @@
 local vesikalikPlease = {}
 
-RegisterNetEvent('fx-idcard:server:requestFramework')
-AddEventHandler('fx-idcard:server:requestFramework', function()
-    local src = source
-    TriggerClientEvent('fx-idcard:client:receiveFramework', src, Framework)
-end)
-
-
 RegisterNetEvent("fx-idcard:server:print", function(link)
     local src = source
     if Config.Prices.printphoto then
@@ -28,6 +21,7 @@ RegisterNetEvent("fx-idcard:server:print", function(link)
     }
 
     FXAddItem(src, Config.PrintPhotoItem, 1, metadata)
+    
     Notify({
         source = src,
         text = Locale("successprint"),
@@ -76,6 +70,7 @@ end)
 FXRegisterUsableItem(Config.PrintPhotoItem,function(data)
     local src = data.source
     local link = data.item.metadata.img
+    local PrintPhotoItemId = data.item.id
     local data = {img = link}
     FXCloseInventory(src)
     if vesikalikPlease[tostring(src)] then
@@ -90,6 +85,7 @@ FXRegisterUsableItem(Config.PrintPhotoItem,function(data)
             weight = "73",
             city = "",
             img = link,
+            itemId = PrintPhotoItemId,
             religious = Config.Religious[math.random(1,#Config.Religious)],
         }
         if not Config.IDCardNPC[city].illegal then
@@ -104,6 +100,7 @@ FXRegisterUsableItem(Config.PrintPhotoItem,function(data)
                     weight = data.weight,
                     city = city,
                     img = link,
+                    itemId = PrintPhotoItemId,
                     religious = Config.Religious[math.random(1,#Config.Religious)],
                 }
                 Wait(1000)
@@ -152,7 +149,7 @@ RegisterNetEvent('fx-idcard:server:buyIdCard', function(data)
         local HaveMoney = FXHaveMoney(src, "cash", price)
         if HaveMoney then
             FXRemoveMoney(src, "cash", price)
-            local photoRemoved = FXRemoveItem(src, Config.PrintPhotoItem, 1, {img = data.img}) -- Metadata eşleşmesini kontrol et
+            local photoRemoved = FXRemoveItem(src,Config.PrintPhotoItem,1,{img = data.img}, tonumber(data.itemId))
 
             if not photoRemoved then
                 return Notify({
