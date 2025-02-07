@@ -201,6 +201,32 @@ RegisterNetEvent('fx-idcard:server:buyIdCard', function(data)
             end
         end)
     elseif Config.TakeCardType == "item" then
+        if not data.illegal then 
+            exports.oxmysql:execute("SELECT * FROM fx_idcard WHERE charid = ?", {charid}, function(result)
+                if not result[1] then
+                    local Parameters = {
+                        ['charid'] = charid,
+                        ['data'] = tostring(json.encode(data)),
+                    }
+                    exports.oxmysql:execute("INSERT INTO fx_idcard (`charid`, `data`) VALUES (@charid, @data)", Parameters)
+                    TriggerClientEvent('fx-idcard:client:setData', src, data)
+                    Notify({
+                        source = src,
+                        text = Locale("successidcard"),
+                        type = "success",
+                        time = 4000
+                    })
+                    CharData = data
+                else
+                    Notify({
+                        source = src,
+                        text = Locale("alreadyidcard"),
+                        type = "error",
+                        time = 4000
+                    })
+                end
+            end)
+        end
         local item = Config.ManIdCardItem
         local metadata = {
             description = Locale("idcarddesc", {
