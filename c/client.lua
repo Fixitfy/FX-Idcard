@@ -409,6 +409,11 @@ Citizen.CreateThread(function()
     end
 end)
 
+if Config.TakeCardType == "sql" then
+    RegisterCommand(Config.ShowIdcardCommand, function()
+        TriggerEvent("fx-idcard:client:showIDCardSQL")
+    end)
+end
 
 AddEventHandler('onResourceStop', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then

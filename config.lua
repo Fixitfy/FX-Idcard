@@ -1,5 +1,6 @@
 Config = {}
 Config.Language = "en"
+Config.ShowIdcardCommand = "idcard" -- If this command works if TakeCardType is selected as “sql”
 Config.TakeCardType = "item" ---- or "sql" (If you select item, it will give you a special ID card with metada and you can have more than one ID card. If you select sql, it will be saved in everyone's data and you will be able to create id card only 1 time.)
 Config.Keybinds = {
     ["takephoto"] = 0x760A9C6F,
@@ -323,12 +324,14 @@ function Notify(data)
 end
 
 
-function Locale(key,subs)
-    local translate = Config.Locale[Config.Language][key] and Config.Locale[Config.Language][key] or "Config.Locale["..Config.Language.."]["..key.."] doesn't exits"
-    subs = subs and subs or {}
-    for k, v in pairs(subs) do
-        local templateToFind = '%${' .. k .. '}'
-        translate = translate:gsub(templateToFind, tostring(v))
-    end
-    return tostring(translate)
+function Locale(key, subs)
+  local translate = Config.Locale[Config.Language][key] and Config.Locale[Config.Language][key] or "Config.Locale[" .. Config.Language .. "][" .. key .. "] doesn't exist"
+  subs = subs and subs or {}
+  for k, v in pairs(subs) do
+      local templateToFind = '%${' .. k .. '}'
+      local safeValue = tostring(v):gsub("%%", "%%%%")
+      translate = translate:gsub(templateToFind, safeValue)
+  end
+  translate = tostring(translate):gsub("%%%%", "%%")
+  return tostring(translate)
 end
